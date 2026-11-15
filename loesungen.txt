@@ -1,0 +1,18 @@
+Aufgabe 1
+c)
+
+Mutual Exclusion ist erfüllt, weil der Monitor des Stack-Objekts nur von einem Thread gleichzeitig betreten werden kann.
+Hold and Wait ist erfüllt, weil zum Beispiel ein Consumer den Zugriff auf einen leeren Stack blockieren kann, gleichzeitig aber darauf wartend, dass ein Producer ihn wieder füllt. 
+No Preemption ist erfüllt, weil der Monitor nur freiwillig durch Verlassen des synchronized-Blocks freigegeben wird.
+Circular Wait ist erfüllt, weil bei Stack-Kapazität 1 ein Producer einen Stack voll machen kann, und dann mit notify() einen weiteren Producer weckt, der dann aber sofort wartet.
+
+Aufgabe 2
+a)
+
+Eine Race Condition liegt vor, wenn das korrekte Verhalten des Programms von der relativen zeitlichen Reihenfolge der Threads abhängt. Ein Data Race ist ein spezieller
+Fall einer Race Condition. Dabei greifen zwei oder mehr Threads im selben Prozess auf dieselbe Speicheradresse gleichzeitig zu, mindestens einer dieser Zugriffe ist ein Schreibzugriff und
+keinerlei Synchronisation (wie Mutexes, Locks oder atomare Operationen) werden verwendet, um die Zugriffe zu ordnen.
+
+b)
+Das Lesen und Schreiben der Threads ist nicht synchronisiert. Dadurch entsteht eine klassicher Data Race. Wenn zwei Threads
+gleichzeitig counter = 5 lesen und beide anschließend 6 schreiben, wird nur einer von zwei Besuchen gezählt.
