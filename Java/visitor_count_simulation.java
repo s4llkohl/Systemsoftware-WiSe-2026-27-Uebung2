@@ -5,11 +5,10 @@ public class visitor_count_simulation {
 
     static int counter = 0;
     static Random random = new Random();
+    static final Object counterLock = new Object();
 
     public static void registerVisits() {
         for (int i = 0; i < 1000; i++) {
-            int temp = counter;
-
             if (random.nextDouble() < 0.001) {
                 try {
                     Thread.sleep(0, random.nextInt(10000));
@@ -19,7 +18,9 @@ public class visitor_count_simulation {
                 }
             }
 
-            counter = temp + 1;
+            synchronized (counterLock) {
+                counter = counter + 1;
+            }
         }
     }
 
