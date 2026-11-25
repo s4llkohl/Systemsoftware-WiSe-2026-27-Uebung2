@@ -1,4 +1,3 @@
-
 import java.util.Random;
 
 public class visitor_count_simulation {
@@ -8,24 +7,24 @@ public class visitor_count_simulation {
 
     public static void registerVisits() {
         for (int i = 0; i < 1000; i++) {
-            int temp = counter;
-
-            if (random.nextDouble() < 0.001) {
-                try {
-                    Thread.sleep(0, random.nextInt(10000));
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                    return;
+            synchronized (visitor_count_simulation.class) {
+                int temp = counter;
+                if (random.nextDouble() < 0.001) {
+                    try {
+                        Thread.sleep(0, random.nextInt(10000));
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                        return;
+                    }
                 }
-            }
 
-            counter = temp + 1;
+                counter = temp + 1;
+            }
         }
     }
 
     public static void main(String[] args) throws InterruptedException {
         Thread[] threads = new Thread[10];
-
         for (int i = 0; i < 10; i++) {
             threads[i] = new Thread(visitor_count_simulation::registerVisits);
             threads[i].start();
