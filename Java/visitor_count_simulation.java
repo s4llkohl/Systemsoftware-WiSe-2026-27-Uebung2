@@ -6,7 +6,7 @@ public class visitor_count_simulation {
     static int counter = 0;
     static Random random = new Random();
 
-    public static void registerVisits() {
+    public static synchronized void registerVisits() {
         for (int i = 0; i < 1000; i++) {
             int temp = counter;
 
@@ -18,8 +18,7 @@ public class visitor_count_simulation {
                     return;
                 }
             }
-
-            counter = temp + 1;
+                counter = temp + 1;
         }
     }
 
