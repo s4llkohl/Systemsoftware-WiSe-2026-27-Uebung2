@@ -1,0 +1,28 @@
+1c)
+notify() weckt nur einen beliebigen wartenden Thread auf. Das kann ein Thread der
+falschen Sorte sein, zum Beispiel weckt ein Producer einen anderen Producer. Dieser sieht,
+dass der Stack immer noch voll ist, und legt sich sofort wieder schlafen. Der Consumer, der
+eigentlich weitermachen könnte, wird nie geweckt. Irgendwann schlafen alle Threads und
+niemand ist mehr da, der notify() aufrufen kann.
+Korrektur: In Stack.java wird notify() durch notifyAll() ersetzt.
+notifyAll() weckt ALLE wartenden Threads auf. Jeder prüft mit seiner while-Schleife noch
+einmal seine Bedingung. Threads, für die es noch nicht passt, schlafen wieder ein, aber der
+passende Thread (z.B. ein Consumer) ist garantiert dabei und kann weiterarbeiten.
+
+
+2a)
+Data Race: Mindestens zwei Threads greifen gleichzeitig auf dieselbe Speicherstelle
+zu, mindestens ein Zugriff ist ein Schreibzugriff und die Zugriffe sind nicht
+synchronisiert.
+Race Condition: Das Ergebnis bzw. die Korrektheit des Programms hängt von der zeitlichen
+Reihenfolge der Threads ab. Je nach Ablauf kommt etwas anderes heraus.
+
+
+2b)
+Alle 10 Threads benutzen dieselbe Variable counter. Jeder Thread zählt 1000-mal und das
+Ergebnis soll 10000 sein.
+Das ist nicht atomar. Wenn ein Thread zwischen Schritt 1 und 3 schläft oder vom Scheduler
+unterbrochen wird, zählen die anderen Threads in der Zwischenzeit weiter. Wenn der Thread
+aufwacht, schreibt er seinen alten Wert temp + 1 zurück und überschreibt damit alle
+Erhöhungen, die die anderen Threads in der Zwischenzeit gemacht haben.
+
