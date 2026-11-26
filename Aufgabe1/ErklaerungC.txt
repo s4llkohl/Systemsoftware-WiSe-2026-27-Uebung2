@@ -1,0 +1,10 @@
+Ein Deadlock entsteht, wenn mehrere Threads dauerhaft aufeinander warten und dadurch ihre Arbeit nicht mehr fortsetzen können.
+
+Nach Coffman müssen dafür vier Bedingungen gleichzeitig erfüllt sein:
+- Mutual Exclusion (Nur ein Thread darf gleichzeitig den Stack verändern)
+- Hold and Wait	(Ein Thread hält die Synchronisationsressource und wartet auf eine weitere Beduingung)
+- No Preemption	(Ein Lock kann einem Thread nicht einfach weggenommen werden)
+- Circular Wait	(Threads warten in einem geschlossenen Kreis aufeinander)
+
+
+Wenn sich die falschen Threads gegenseitig aufwecken beziehungsweise wieder schlafen legen, kann eine Verklemmung entstehen.

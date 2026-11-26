@@ -1,0 +1,9 @@
+Data Race
+
+Ein Data Race entsteht, wenn mehrere Threads gleichzeitig auf die selbe Speicherstelle zugreifen und mindestens ein Thread diese verändert, ohne dass eine ausreichende Synchronisation vorhanden ist.
+
+
+Race Condition
+
+Eine Race Condition entsteht, wenn das Ergebnis eines Programms von der zeitlichen Reihenfolge beziehungsweise dem Ausführungszeitpunkt verschiedener Threads abhängt.
+Das bedeutet, dass das Programm bei unterschiedlichen Ausführungsreihenfolgen unterschiedliche Ergebnisse liefern kann.

@@ -1,19 +1,26 @@
+
 import threading
 import time
 import random
 
 counter = 0
 
+# Lock zur Synchronisation erstellen
+lock = threading.Lock()
+
+
 def register_visits():
     global counter
 
     for _ in range(1000):
-        temp = counter
 
-        if random.random() < 0.001:
-            time.sleep(random.uniform(0, 0.00001))
+        with lock:
+            temp = counter
 
-        counter = temp + 1
+            if random.random() < 0.001:
+                time.sleep(random.uniform(0, 0.00001))
+
+            counter = temp + 1
 
 
 threads = []

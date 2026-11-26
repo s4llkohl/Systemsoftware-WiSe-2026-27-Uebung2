@@ -1,0 +1,7 @@
+Die folgende Stelle im Code:
+
+        if random.random() < 0.001:
+            time.sleep(random.uniform(0, 0.00001))
+
+
+sorgt dafür, dass zwei verschiedene Threads zwar den gleichen Wet lesen, aber (durch die kurze Pause) den selben Wert schreiben, wodurch ein Besucher "verloren" geht.
