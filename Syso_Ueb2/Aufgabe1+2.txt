@@ -1,0 +1,15 @@
+Aufgabe 1
+
+c) Nach Coffman sind die folgenden vier Bedingungen nötig für einen Deadlock:
+ 1) Die Betriebsmittel werden ausschließlich durch die Prozesse freigegeben. (No Preemption)
+ 2) Die Prozesse fordern Betriebsmittel an, behalten aber zugleich den Zugriff auf andere (Hold and Wait).
+ 3) Der Zugriff auf ein Betriebsmittel ist exklusiv, d. h. nur einem einzigen Prozess wird der Zugriff auf ein Betriebsmittel gestattet (Mutual Exclusion).
+ 4) Mindestens zwei Prozesse besitzen bezüglich der Betriebsmittel eine zirkuläre Abhängigkeit (Circular Wait)
+Aufgabe 2
+
+a) Data races entstehen, wenn mehrere threads gleichzeitig auf denselben Speicherbereich zugreifen, davon mindestens einer schreibt und keine Synchronisation stattfindet.
+Race Conditions treten auf, wenn das Ergebnis eines Systems von der Reihenfolge und des Timings der Vorgänge ablaufen. Bei Race Conditions kommt es zu Dateninkonsistenz.
+
+b) In der Funktion registerVisits() greifen die Threads auf einen gemeinsamen Speicher counter. Die Threads speichern den Wert von counter in die Variable temp, dann wird temp um 1 inkrementiert. Zuletzt wird counter mit dem neuen temp-Wert ersetzt.
+Wenn zwischen dem Abspeichern in temp und dem Ersetzen von counter mit temp+1, die Variable counter schon um x erhöht wurde, gehen diese x Inkrementierungen beim Ersetzen verloren.
+Dieser Effekt wird durch den sleeptimer verschlimmert, da in dieser Zeit viele Inkrementierungen geschehen.
