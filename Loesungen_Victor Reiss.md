@@ -1,6 +1,6 @@
 # Systemsoftware WiSe 2026/27 – Übung 2
 
-**Name:** _bitte eintragen_
+Victor Reiss
 
 Aufgabe 1 ist in Java gelöst (`Java/Aufgabe1/`). Für Aufgabe 2 wurden beide Varianten (Java und Python) korrigiert.
 
