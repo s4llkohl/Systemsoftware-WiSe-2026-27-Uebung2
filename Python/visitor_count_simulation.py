@@ -3,17 +3,22 @@ import time
 import random
 
 counter = 0
+# Aufgabe 2c: Mutex, der den kritischen Abschnitt schützt
+counter_lock = threading.Lock()
 
 def register_visits():
     global counter
 
     for _ in range(1000):
-        temp = counter
+        # Aufgabe 2c: Lesen, (unveränderter) Sleep und Zurückschreiben bilden
+        # einen kritischen Abschnitt, den immer nur ein Thread betreten darf.
+        with counter_lock:
+            temp = counter
 
-        if random.random() < 0.001:
-            time.sleep(random.uniform(0, 0.00001))
+            if random.random() < 0.001:
+                time.sleep(random.uniform(0, 0.00001))
 
-        counter = temp + 1
+            counter = temp + 1
 
 
 threads = []
