@@ -5,21 +5,27 @@ public class visitor_count_simulation {
 
     static int counter = 0;
     static Random random = new Random();
+    // Aufgabe 2c: gemeinsames Sperrobjekt, das den kritischen Abschnitt schützt
+    static final Object lock = new Object();
 
     public static void registerVisits() {
         for (int i = 0; i < 1000; i++) {
-            int temp = counter;
+            // Aufgabe 2c: Lesen, (unveränderter) Sleep und Zurückschreiben bilden
+            // einen kritischen Abschnitt, den immer nur ein Thread betreten darf.
+            synchronized (lock) {
+                int temp = counter;
 
-            if (random.nextDouble() < 0.001) {
-                try {
-                    Thread.sleep(0, random.nextInt(10000));
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                    return;
+                if (random.nextDouble() < 0.001) {
+                    try {
+                        Thread.sleep(0, random.nextInt(10000));
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                        return;
+                    }
                 }
-            }
 
-            counter = temp + 1;
+                counter = temp + 1;
+            }
         }
     }
 
